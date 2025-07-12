@@ -1,0 +1,29 @@
+<?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.html");
+    exit;
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenido</title>
+</head>
+<body>
+    <h2>Bienvenido, <?php echo $_SESSION['usuario']; ?></h2>
+    <p>Tu rol es: <?php echo $_SESSION['rol']; ?></p>
+
+    <?php if ($_SESSION['rol'] == 'admin'): ?>
+        <p><strong>Área de administrador:</strong> puedes gestionar usuarios y configuraciones.</p>
+    <?php elseif ($_SESSION['rol'] == 'editor'): ?>
+        <p><strong>Área de editor:</strong> puedes editar contenidos.</p>
+    <?php else: ?>
+        <p><strong>Área de usuario:</strong> puedes ver contenidos.</p>
+    <?php endif; ?>
+
+    <a href="logout.php">Cerrar sesión</a>
+</body>
+</html>
